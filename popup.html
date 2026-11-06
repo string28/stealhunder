@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Steam Deal Hunter</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="ambient-glow glow-crimson"></div>
+  <div class="ambient-glow glow-iris"></div>
+
+  <!-- Top Bar Liquid Glass -->
+  <header class="glass-header">
+    <div class="brand">
+      <div class="eye-logo" title="DealHunter Eye">
+        <svg viewBox="0 0 100 100" class="eye-svg">
+          <defs>
+            <radialGradient id="irisGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#050507"/>
+              <stop offset="35%" stop-color="#050507"/>
+              <stop offset="55%" stop-color="#ec4899"/>
+              <stop offset="78%" stop-color="#a855f7"/>
+              <stop offset="100%" stop-color="#1e1b4b"/>
+            </radialGradient>
+          </defs>
+          <path d="M8 52 Q50 14 92 52 Q50 88 8 52 Z" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+          <circle cx="50" cy="51" r="22" fill="url(#irisGrad)"/>
+          <circle cx="50" cy="51" r="9" fill="#040406"/>
+          <path d="M6 48 Q50 10 94 48" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+          <path d="M18 35 L10 18 M34 26 L30 9 M50 23 L50 6 M66 26 L70 9 M82 35 L90 18" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="42" cy="43" r="4" fill="#ffffff" opacity="0.9"/>
+          <circle cx="58" cy="57" r="2" fill="#f43f5e" opacity="0.8"/>
+        </svg>
+      </div>
+      <div>
+        <h1>Deal<span>Hunter</span></h1>
+        <p class="subtitle">Official Key Scanner</p>
+      </div>
+    </div>
+
+    <div class="currency-box">
+      <select id="currencySelect" aria-label="Selecionar Moeda">
+        <option value="BRL">BRL (R$)</option>
+        <option value="USD">USD ($)</option>
+        <option value="EUR">EUR (€)</option>
+        <option value="GBP">GBP (£)</option>
+        <option value="ARS">ARS ($)</option>
+        <option value="JPY">JPY (¥)</option>
+      </select>
+    </div>
+  </header>
+
+  <!-- Active Tab Banner (Auto-Detect Steam Page) -->
+  <div id="activeTabBanner" class="active-tab-banner hidden">
+    <div class="banner-info">
+      <span class="pulse-dot"></span>
+      <span id="activeTabText">Jogo Steam detectado na aba atual!</span>
+    </div>
+    <button id="btnScanCurrentTab" class="btn-mini">Escanear Aba</button>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <nav class="mode-tabs">
+    <button class="tab-btn active" data-tab="search">Buscar Jogo</button>
+    <button class="tab-btn" data-tab="links">Links / Wishlist</button>
+    <button class="tab-btn" data-tab="saved">Salvos (<span id="savedCount">0</span>)</button>
+  </nav>
+
+  <!-- Search Panel -->
+  <main class="container">
+    <section id="tab-search" class="tab-content active">
+      <div class="search-bar glass-panel">
+        <input type="text" id="searchInput" placeholder="Digite o nome do jogo (ex: Cyberpunk, Elden Ring)...">
+        <button id="btnSearchName" class="btn-crimson">Buscar</button>
+      </div>
+    </section>
+
+    <section id="tab-links" class="tab-content hidden">
+      <div class="links-box glass-panel">
+        <textarea id="linksInput" rows="3" placeholder="Cole links de jogos da Steam (store.steampowered.com/app/...) ou seu SteamID64 da Wishlist pública..."></textarea>
+        <div class="links-actions">
+          <label class="checkbox-label">
+            <input type="checkbox" id="onlyDiscounts">
+            <span>Apenas em promoção</span>
+          </label>
+          <button id="btnScanLinks" class="btn-crimson">Escanear Links</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-saved" class="tab-content hidden">
+      <div class="saved-header">
+        <span>Jogos monitorados localmente</span>
+        <button id="btnRefreshSaved" class="btn-outline">Atualizar Preços</button>
+      </div>
+    </section>
+
+    <!-- Status Bar -->
+    <div id="statusBar" class="status-bar hidden">
+      <div class="spinner" id="statusSpinner"></div>
+      <span id="statusText">Consultando API oficial da Steam...</span>
+    </div>
+
+    <!-- Results List -->
+    <div id="resultsContainer" class="results-list">
+      <div class="empty-state">
+        <div class="empty-icon">🎯</div>
+        <h2>Pronto para Caçar Ofertas</h2>
+        <p>Busque qualquer jogo pelo nome, cole links da Steam ou abra uma página da loja Steam para comparar o preço regional exato com chaves oficiais.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="glass-footer">
+    <span>Zero CORS &bull; Preço Exato Steam API + Lojas Oficiais</span>
+    <span id="rateInfo">USD/BRL: ...</span>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

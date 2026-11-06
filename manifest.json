@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Steam Deal Hunter // Official Keys",
+  "version": "2.0.0",
+  "description": "Rastreador de preços regionais exatos da Steam e chaves oficiais em lojas parceiras com design Obsidian Liquid Glass.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://store.steampowered.com/*",
+    "https://api.steampowered.com/*",
+    "https://www.cheapshark.com/*",
+    "https://economia.awesomeapi.com.br/*",
+    "https://open.er-api.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Steam Deal Hunter"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://store.steampowered.com/app/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
